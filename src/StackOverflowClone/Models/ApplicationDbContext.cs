@@ -9,5 +9,11 @@ namespace StackOverflowClone.Models
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Response> Responses { get; set; }
     }
 }

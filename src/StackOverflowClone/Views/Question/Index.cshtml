@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@using System.Security.Claims
+
+@model IEnumerable<StackOverflowClone.Models.Question>
+
+<h2>Here is a list of your questions: </h2>
+<hr />
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var question in Model)
+        {
+            <li>@Html.DisplayFor(modelQuestion => question.Title)</li>
+
+        }
+    </ul>
+}
+else
+{
+    <p>You have not asked any questions yet!</p>
+}
+@Html.ActionLink("Create New Question", "Create")

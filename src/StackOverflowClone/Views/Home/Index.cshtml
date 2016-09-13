@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<StackOverflowClone.Models.Question>
+
+<h1>Stack Overflow Clone</h1>
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var question in Model)
+        {
+            <li>@Html.DisplayFor(modelQuestion => question.Title)</li>
+
+        }
+    </ul>
+}
+else
+{
+    <p>No Questions have been asked. Please Log In to continue!</p>
+}

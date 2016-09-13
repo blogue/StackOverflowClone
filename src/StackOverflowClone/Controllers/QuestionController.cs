@@ -46,8 +46,8 @@ namespace StackOverflowClone.Controllers
         public IActionResult Details(int id)
         {
             var thisQuestion = _db.Questions
-                .Include(questions => questions.Responses)
-                .ThenInclude(questions => questions.User)
+                .Include(questions => questions.Responses).ThenInclude(responses => responses.User)
+                .Include(questions => questions.User)
                 .FirstOrDefault(questions => questions.Id == id);
                 
             return View(thisQuestion);

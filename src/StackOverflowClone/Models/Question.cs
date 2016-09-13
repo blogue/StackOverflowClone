@@ -18,5 +18,7 @@ namespace StackOverflowClone.Models
         public int Score { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Response> Responses { get; set; }
+
+        
     }
 }

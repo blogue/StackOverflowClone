@@ -52,5 +52,20 @@ namespace StackOverflowClone.Controllers
                 
             return View(thisQuestion);
         }
+        public IActionResult increment(int id)
+        {
+            var thisQuestion = _db.Questions.FirstOrDefault(questions => questions.Id == id);
+            thisQuestion.Score++;
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult decrement(int id)
+        {
+            var thisQuestion = _db.Questions.FirstOrDefault(questions => questions.Id == id);
+            thisQuestion.Score--;
+            _db.SaveChanges();
+            return RedirectToAction("Index","Home");
+        }
     }
 }

@@ -4,23 +4,28 @@
 
 @model StackOverflowClone.Models.Question
 
+<div class="row">
+    <div class="col-md-1">
+        @Html.DisplayFor(model => model.Score)
+    </div>
+    <div class="col-md-11">
+        <h3>@Html.DisplayFor(model => model.Title) | @Html.DisplayFor(model => model.User.UserName)</h3>
+        <hr />
 
+        <p>
+            @Html.DisplayFor(model => model.Content) 
+        </p>
+        <hr />
+        <ul>
+            @foreach (var response in Model.Responses)
+            {
+                <li>
+                    <h3>@response.User.UserName</h3>
+                    <p>@response.Content</p>
+                </li>
+            }
+        </ul>
 
-<h3>@Html.DisplayFor(model => model.Title) | @Html.DisplayFor(model => model.User.UserName)</h3>
-<hr />
-
-<p>
-    @Html.DisplayFor(model => model.Content) 
-</p>
-<hr />
-<ul>
-    @foreach (var response in Model.Responses)
-    {
-        <li>
-            <h3>@response.User.UserName</h3>
-            <p>@response.Content</p>
-        </li>
-    }
-</ul>
-
-@Html.ActionLink("Post a response", "Create", "Response", new { questionId = Model.Id })
+        @Html.ActionLink("Post a response", "Create", "Response", new { questionId = Model.Id })
+    </div>
+</div>

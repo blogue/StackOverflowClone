@@ -9,7 +9,7 @@
     <ul>
         @foreach (var question in Model)
         {
-            <li>@Html.ActionLink(question.Title, "Details", "Question", new { id = question.Id })</li>
+            <li>@question.Score -  @Html.ActionLink(question.Title, "Details", "Question", new { id = question.Id }) @Html.ActionLink("+", "increment", "Question", new { id = question.Id }) | @Html.ActionLink("-", "decrement", "Question", new { id = question.Id })</li>
 
         }
     </ul>

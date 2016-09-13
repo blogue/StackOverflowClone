@@ -19,5 +19,6 @@ namespace StackOverflowClone.Controllers
         {
             return View(_db.Questions.ToList());
         }
+        
     }
 }

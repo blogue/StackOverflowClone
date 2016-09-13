@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Authorization;
 using StackOverflowClone.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace StackOverflowClone.Controllers
 {
-    [Authorize]
+    
     public class QuestionController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -19,19 +20,19 @@ namespace StackOverflowClone.Controllers
             _userManager = userManager;
             _db = db;
         }
-
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
             return View(_db.Questions.Where(x => x.User.Id == currentUser.Id));
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<IActionResult> Create(Question question)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -41,6 +42,14 @@ namespace StackOverflowClone.Controllers
             _db.Questions.Add(question);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public IActionResult Details(int id)
+        {
+            var thisQuestion = _db.Questions
+                .Include(questions => questions.User)
+                .FirstOrDefault(questions => questions.Id == id);
+                
+            return View(thisQuestion);
         }
     }
 }

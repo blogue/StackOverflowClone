@@ -17,5 +17,14 @@ namespace StackOverflowClone.Models
         public virtual ApplicationUser User { get; set; }
         public int QuestionId { get; set; }
         public virtual Question Question { get; set; }
+
+        public Response() { }
+
+        public Response(int questionId)
+        {
+            QuestionId = questionId;
+        }
     }
+    
+    
 }

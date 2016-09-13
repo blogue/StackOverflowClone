@@ -1,5 +1,4 @@
 ﻿@{ 
-    ViewData["Title"] = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,3 +12,15 @@
 <p>
     @Html.DisplayFor(model => model.Content) 
 </p>
+<hr />
+<ul>
+    @foreach (var response in Model.Responses)
+    {
+        <li>
+            <h3>@response.User.UserName</h3>
+            <p>@response.Content</p>
+        </li>
+    }
+</ul>
+
+@Html.ActionLink("Post a response", "Create", "Response", new { questionId = Model.Id })
